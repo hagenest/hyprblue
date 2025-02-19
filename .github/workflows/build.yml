@@ -180,3 +180,62 @@ jobs:
           TAGS: ${{ steps.push.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
+
+      - name: Build ISOs
+        uses: jasonn3/build-container-installer@v1.2.4
+        id: build
+        with:
+          arch: x86_64
+          image_name: hyprblue
+          image_repo: ${{ steps.registry_case.outputs.lowercase }}
+          variant: 'Kinoite'
+          version: 41
+          image_tag: latest
+          secure_boot_key_url: '${{ github.server_url }}/${{ github.repository }}/raw/main/secure_boot.der'
+          enrollment_password: 'universalblue'
+          iso_name: hyprblue-41-amd64.iso
+          enable_cache_dnf: "false"
+          enable_cache_skopeo: "false"
+          #flatpak_remote_refs_dir: ${{ steps.generate-flatpak-dir-shortname.outputs.flatpak-dir-shortname }}
+          enable_flatpak_dependencies: "false"
+          #extra_boot_params: ${{ steps.generate-extra-params.outputs.extra-boot-params }}
+          #additional_templates: '/github/workspace/installer/lorax_templates/remove_root_password_prompt.tmpl /github/workspace/installer/lorax_templates/set_default_user.tmpl'
+          #repos: '/github/workspace/bazzite.repo /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora-updates.repo'
+
+      - name: Move ISOs to Upload Directory
+        id: upload-directory
+        shell: bash
+        run: |
+          ISO_UPLOAD_DIR=${{ github.workspace }}/upload
+          mkdir ${ISO_UPLOAD_DIR}
+          mv ${{ steps.build.outputs.iso_path }}/${{ steps.build.outputs.iso_name }} ${ISO_UPLOAD_DIR}
+          mv ${{ steps.build.outputs.iso_path }}/${{ steps.build.outputs.iso_name }}-CHECKSUM ${ISO_UPLOAD_DIR}
+          echo "iso-upload-dir=${ISO_UPLOAD_DIR}" >> $GITHUB_OUTPUT
+
+      - name: Upload ISOs and Checksum to Job Artifacts
+        if: github.ref_name == 'testing'
+        #if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hyprblue-41-latest
+          path: ${{ steps.upload-directory.outputs.iso-upload-dir }}
+          if-no-files-found: error
+          retention-days: 0
+          compression-level: 0
+          overwrite: true
+
+      # - name: Upload ISOs and Checksum to R2
+      #   if: github.event_name == 'workflow_dispatch' && github.ref_name == 'main'
+      #   shell: bash
+      #   env:
+      #     RCLONE_CONFIG_R2_TYPE: s3
+      #     RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      #     RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      #     RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      #     RCLONE_CONFIG_R2_REGION: auto
+      #     RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      #     SOURCE_DIR: ${{ steps.upload-directory.outputs.iso-upload-dir }}
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y rclone
+      #     rclone copy $SOURCE_DIR R2:bazzite
