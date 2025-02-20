@@ -54,7 +54,7 @@ jobs:
           echo "date=$(date -u +%Y\-%m\-%d\T%H\:%M\:%S\Z)" >> $GITHUB_OUTPUT
 
       - name: Read config.yml
-        uses: pietrobolcato/action-read-yaml@v1.0.0
+        uses: pietrobolcato/action-read-yaml
         id: config_yml
         with:
           config: ${{ github.workspace }}/config.yml
