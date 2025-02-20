@@ -19,6 +19,6 @@ RUN mkdir -p /var/lib/alternatives && \
     /tmp/hypr.sh && \
     ostree container commit
 
-COPY hyprland.conf /etc/xdg/hyprland.conf # default hyprland config
+COPY hyprland.conf /etc/xdg/hyprland.conf
 
-COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh # autostart hyprland
+COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh
