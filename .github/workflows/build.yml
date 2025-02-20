@@ -201,7 +201,7 @@ jobs:
 
           # Image (registry with tag) used in the artifact.
           # Required.
-          image: "ghcr.io/${{ github.repository_owner }}${{ github.event.repository.name }}"
+          image: "ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}"
 
           # The upstream builder image.
           # Optional. Default is 'quay.io/centos-bootc/bootc-image-builder:latest'
