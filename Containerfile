@@ -18,8 +18,6 @@ COPY hypr.sh /tmp/hypr.sh
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/hypr.sh && \
     ostree container commit
-    
-RUN mkdir /etc/xdg/
 
 COPY hyprland.conf /etc/xdg/hyprland.conf # default hyprland config
 
