@@ -197,7 +197,7 @@ jobs:
 
           # The expected artifact type
           # Optional. Default is 'iso'
-          type: iso
+          # type: iso # runner tells me this is unknown, but tbh if the default is iso already, idk
 
           # Image (registry with tag) used in the artifact.
           # Required.
