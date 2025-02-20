@@ -22,6 +22,7 @@ dnf5 -y install hyprsunset # TODO read docs and configure
 dnf5 -y install hyprland-plugins # TODO there seems to be some nice stuff
 dnf5 -y install hyprnome # workspace switching like in my beloved gnome
 dnf5 -y install uwsm # needed to start hyprland via systemd
+dnf5 -y install hyprshot #screenshot
 
 # Add packages from azandure here
 dnf5 -y install clipse # Clipboard-Manager - TODO see the clipse GitHub for hyprland instructions
@@ -55,7 +56,6 @@ dnf -y install qt5-qtwayland qt6-qtwayland # wayland support for QT
 dnf -y install waybar # GTK status bar for wlroots with hyprland support
 # can be started with exec-once, until uwsm is working. Then use waybar.service.
 dnf -y install udiskie # automount usb, start with exec-once
-dnf -y install hyprshot
 # TODO Do I want a dock?
 
 # File managers (Nautlius for life)
