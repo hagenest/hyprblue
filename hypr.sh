@@ -20,7 +20,7 @@ dnf5 -y install hypridle # idle daemon TODO find out how to use it
 dnf5 -y install hyprsunset # TODO read docs and configure
 # dnf5 -y install hyprcursor # TODO seems complicated and useless, but somewhat cool
 dnf5 -y install hyprland-plugins # TODO there seems to be some nice stuff
-dnf5 -y install hypernome # workspace switching like in my beloved gnome
+dnf5 -y install hyprnome # workspace switching like in my beloved gnome
 dnf5 -y install uwsm # needed to start hyprland via systemd
 
 # Add packages from azandure here
