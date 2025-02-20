@@ -189,7 +189,7 @@ jobs:
 
       - name: Build Iso
         id: build-iso
-        uses: ublue-os/bootc-image-builder-action
+        uses: ublue-os/bootc-image-builder-action@1b6c5a5726729139d8a9e59a88978d837b3c8e20
         with:
           # Configuration file for the image builder.
           # Required.
