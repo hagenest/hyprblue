@@ -187,44 +187,31 @@ jobs:
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
 
-      - name: Build ISOs
-        uses: jasonn3/build-container-installer@v1.2.4
-        id: build
+      - name: Build Iso
+        id: build-iso
+        uses: ublue-os/bootc-image-builder-action
         with:
-          arch: x86_64
-          image_name: hyprblue
-          image_repo: ${{ steps.registry_case.outputs.lowercase }}
-          variant: 'Kinoite'
-          version: 41
-          image_tag: latest
-          #secure_boot_key_url: '${{ github.server_url }}/${{ github.repository }}/raw/main/secure_boot.der'
-          #enrollment_password: 'universalblue'
-          iso_name: hyprblue-41-amd64.iso
-          enable_cache_dnf: "false"
-          enable_cache_skopeo: "false"
-          flatpak_remote_name: flathub
-          flatpak_remote_url: https://flathub.org/repo/flathub.flatpakrepo
-          flatpak_remote_refs: ${{ steps.config_yml.outputs.flatpaks }}
-          enable_flatpak_dependencies: "false"
-          #extra_boot_params: ${{ steps.generate-extra-params.outputs.extra-boot-params }}
-          #additional_templates: '/github/workspace/installer/lorax_templates/remove_root_password_prompt.tmpl /github/workspace/installer/lorax_templates/set_default_user.tmpl'
-          #repos: '/github/workspace/bazzite.repo /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora-updates.repo'
+          # Configuration file for the image builder.
+          # Required.
+          config-file: iso.toml
 
-      - name: Move ISOs to Upload Directory
-        id: upload-directory
-        shell: bash
-        run: |
-          ISO_UPLOAD_DIR=${{ github.workspace }}/upload
-          mkdir ${ISO_UPLOAD_DIR}
-          mv ${{ steps.build.outputs.iso_path }}/${{ steps.build.outputs.iso_name }} ${ISO_UPLOAD_DIR}
-          mv ${{ steps.build.outputs.iso_path }}/${{ steps.build.outputs.iso_name }}-CHECKSUM ${ISO_UPLOAD_DIR}
-          echo "iso-upload-dir=${ISO_UPLOAD_DIR}" >> $GITHUB_OUTPUT
+          # The expected artifact type
+          # Optional. Default is 'iso'
+          type: iso
 
-      - name: Upload ISOs and Checksum to Job Artifacts
+          # Image (registry with tag) used in the artifact.
+          # Required.
+          image: "ghcr.io/${{ github.repository_owner }}${{ github.event.repository.name }}"
+
+          # The upstream builder image.
+          # Optional. Default is 'quay.io/centos-bootc/bootc-image-builder:latest'
+          bootc-image-builder-image:
+      
+      - name: Upload build contents to build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: hyprblue-41-latest
-          path: ${{ steps.upload-directory.outputs.iso-upload-dir }}
+          name: hyprblue-41-$GITHUB_OUTPUT
+          path: ${{ steps.build-iso.outputs.output-directory }}
           if-no-files-found: error
           retention-days: 0
           compression-level: 0
