@@ -15,7 +15,7 @@ on:
 
 env:
   IMAGE_NAME: "${{ github.event.repository.name }}"  # the name of the image produced by this build, matches repo names
-  IMAGE_DESC: "My Customized Universal Blue Image"
+  IMAGE_DESC: "Hyprland-based OS image, based on Universal Blue"
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
   ARTIFACTHUB_LOGO_URL: "https://avatars.githubusercontent.com/u/120078124?s=200&v=4"  # You should put your own image here so that you get a fancy profile image on https://artifacthub.io/!
 
@@ -52,6 +52,16 @@ jobs:
           # https://artifacthub.io/docs/topics/repositories/container-images/
           # https://linux.die.net/man/1/date
           echo "date=$(date -u +%Y\-%m\-%d\T%H\:%M\:%S\Z)" >> $GITHUB_OUTPUT
+
+      - name: Get information from config.yml
+        uses: actions/github-script@v6
+        id: read-strings
+        with:
+          script: |
+            const yaml = require('js-yaml');
+            const fs = require('fs');
+            const config = yaml.load(fs.readFileSync('./config.yml', 'utf8'));
+            return config.strings;
 
       # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
       # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
@@ -196,7 +206,9 @@ jobs:
           iso_name: hyprblue-41-amd64.iso
           enable_cache_dnf: "false"
           enable_cache_skopeo: "false"
-          #flatpak_remote_refs_dir: ${{ steps.generate-flatpak-dir-shortname.outputs.flatpak-dir-shortname }}
+          flatpak_remote_name: flathub
+          flatpak_remote_url: https://flathub.org/repo/flathub.flatpakrepo
+          flatpak_remote_refs: ${{ steps.read-strings.outputs.result.flatpaks }}
           enable_flatpak_dependencies: "false"
           #extra_boot_params: ${{ steps.generate-extra-params.outputs.extra-boot-params }}
           #additional_templates: '/github/workspace/installer/lorax_templates/remove_root_password_prompt.tmpl /github/workspace/installer/lorax_templates/set_default_user.tmpl'
