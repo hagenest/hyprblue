@@ -2,6 +2,9 @@
 
 set -ouex pipefail
 
+# have to do this, otherwise dnf won't work with copr
+dnf -y install dnf-plugins-core
+
 # enable copr-repos for fresher hyprland builds
 dnf -y copr enable solopasha/hyprland
 dnf -y copr enable azandure/clipse
