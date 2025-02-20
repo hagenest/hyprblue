@@ -2,48 +2,45 @@
 
 set -ouex pipefail
 
-# have to do this, otherwise dnf won't work with copr
-dnf -y install dnf-plugins-core
-
 # enable copr-repos for fresher hyprland builds
-dnf -y copr enable solopasha/hyprland
-dnf -y copr enable azandure/clipse
-dnf -y copr enable errornointernet/walker
-dnf -y copr enable ublue-os/staging
+dnf5 -y copr enable solopasha/hyprland
+dnf5 -y copr enable azandure/clipse
+dnf5 -y copr enable errornointernet/walker
+dnf5 -y copr enable ublue-os/staging
 
 # Add packages from solopasha here
-dnf -y install hyprland
-dnf -y install xdg-desktop-portal-hyprland
-dnf -y install hyprpolkitagent # has to be started via exec-once
-dnf -y install swww # wallpaper, with animation support
-dnf -y install waypaper # GUI wallpaper manager for many backends
-dnf -y install hyprpicker # don't think I'll need a color picker, but who knows
-dnf -y install hyprlock # lockscreen
-dnf -y install hypridle # idle daemon TODO find out how to use it
-dnf -y install hyprsunset # TODO read docs and configure
-# dnf -y install hyprcursor # TODO seems complicated and useless, but somewhat cool
-dnf -y install hyprland-plugins # TODO there seems to be some nice stuff
-dnf -y install hypernome # workspace switching like in my beloved gnome
-dnf -y install uwsm # needed to start hyprland via systemd
+dnf5 -y install hyprland
+dnf5 -y install xdg-desktop-portal-hyprland
+dnf5 -y install hyprpolkitagent # has to be started via exec-once
+dnf5 -y install swww # wallpaper, with animation support
+dnf5 -y install waypaper # GUI wallpaper manager for many backends
+dnf5 -y install hyprpicker # don't think I'll need a color picker, but who knows
+dnf5 -y install hyprlock # lockscreen
+dnf5 -y install hypridle # idle daemon TODO find out how to use it
+dnf5 -y install hyprsunset # TODO read docs and configure
+# dnf5 -y install hyprcursor # TODO seems complicated and useless, but somewhat cool
+dnf5 -y install hyprland-plugins # TODO there seems to be some nice stuff
+dnf5 -y install hypernome # workspace switching like in my beloved gnome
+dnf5 -y install uwsm # needed to start hyprland via systemd
 
 # Add packages from azandure here
-dnf -y install clipse # Clipboard-Manager - TODO see the clipse GitHub for hyprland instructions
+dnf5 -y install clipse # Clipboard-Manager - TODO see the clipse GitHub for hyprland instructions
 
 # Add packages from errornointernet here
-dnf -y install walker # cool application launcher
+dnf5 -y install walker # cool application launcher
 
 # Add packages from ublue-os here, unclear if this is necessary or if they are part of ublue-main
-dnf -y install ublue-brew
-dnf -y install ptyxis # my favorite terminal emu
-dnf -y install nautilus-open-any-terminal
-dnf -y install tlp
-dnf -y install ublue-fastfetch
+dnf5 -y install ublue-brew
+dnf5 -y install ptyxis # my favorite terminal emu
+dnf5 -y install nautilus-open-any-terminal
+dnf5 -y install tlp
+dnf5 -y install ublue-fastfetch
 
 # Disable copr-repos again
-dnf -y copr disable solopasha/hyprland
-dnf -y copr disable azandure/clipse
-dnf -y copr disable errornointernet/walker
-dnf -y copr disable ublue-os/staging
+dnf5 -y copr disable solopasha/hyprland
+dnf5 -y copr disable azandure/clipse
+dnf5 -y copr disable errornointernet/walker
+dnf5 -y copr disable ublue-os/staging
 
 # Add regular fedora packages here
 
