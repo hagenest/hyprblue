@@ -74,5 +74,6 @@ dnf -y install nautilus
 dnf -y install mpv # can't get over the fact that I'm using mpv, but it's the only one with HDR support
 # TODO Alias to start mpv in hdr-mode with less pain
 dnf -y install distrobox
+dnf -y install tealdeer
 
 # TODO find out how bluefin installs vscode with devcontainers
