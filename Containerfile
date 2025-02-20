@@ -13,9 +13,12 @@ FROM ghcr.io/ublue-os/base-main:latest
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
-COPY build.sh /tmp/build.sh
+COPY hypr.sh /tmp/hypr.sh
 
 RUN mkdir -p /var/lib/alternatives && \
-    /tmp/build.sh && \
+    /tmp/hypr.sh && \
     ostree container commit
     
+COPY hyprland.conf /etc/xdg/hyprland.conf # default hyprland config
+
+COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh # autostart hyprland
