@@ -187,35 +187,20 @@ jobs:
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
 
-      - name: Build Iso
+      - name: Build ISO
         id: build-iso
-        uses: ublue-os/bootc-image-builder-action@1b6c5a5726729139d8a9e59a88978d837b3c8e20
+        uses: bootc-warehouse/bootc-image-builder-action
         with:
-          # Configuration file for the image builder.
-          # Required.
-          config-file: iso.toml
+          config-file: ./iso.toml
+          image: quay.io/fedora/fedora-silverblue:latest
+          types: iso
 
-          # The expected artifact type
-          # Optional. Default is 'iso'
-          # type: iso # runner tells me this is unknown, but tbh if the default is iso already, idk
-
-          # Image (registry with tag) used in the artifact.
-          # Required.
-          image: "ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}"
-
-          # The upstream builder image.
-          # Optional. Default is 'quay.io/centos-bootc/bootc-image-builder:latest'
-          bootc-image-builder-image:
-      
-      - name: Upload build contents to build artifacts
+      - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: hyprblue-41-$GITHUB_OUTPUT
+          name: hyprblue-latest.iso
           path: ${{ steps.build-iso.outputs.output-directory }}
           if-no-files-found: error
-          retention-days: 0
-          compression-level: 0
-          overwrite: true
 
       # - name: Upload ISOs and Checksum to R2
       #   if: github.event_name == 'workflow_dispatch' && github.ref_name == 'main'
