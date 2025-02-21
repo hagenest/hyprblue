@@ -189,7 +189,7 @@ jobs:
 
       - name: Build ISO
         id: build-iso
-        uses: bootc-warehouse/bootc-image-builder-action
+        uses: bootc-warehouse/bootc-image-builder-action@9f1b8132354bbc8a8ba4d46fbc379af1222b8bb1
         with:
           config-file: ./iso.toml
           image: quay.io/fedora/fedora-silverblue:latest
