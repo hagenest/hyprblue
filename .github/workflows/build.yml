@@ -187,20 +187,20 @@ jobs:
           COSIGN_EXPERIMENTAL: false
           COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
 
-      - name: Build ISO
-        id: build-iso
-        uses: bootc-warehouse/bootc-image-builder-action@9f1b8132354bbc8a8ba4d46fbc379af1222b8bb1
-        with:
-          config-file: ./iso.toml
-          image: quay.io/fedora/fedora-silverblue:latest
-          types: iso
+      # - name: Build ISO
+      #   id: build-iso
+      #   uses: bootc-warehouse/bootc-image-builder-action@9f1b8132354bbc8a8ba4d46fbc379af1222b8bb1
+      #   with:
+      #     config-file: ./iso.toml
+      #     image: quay.io/fedora/fedora-silverblue:latest
+      #     types: iso
 
-      - name: Upload ISO
-        uses: actions/upload-artifact@v4
-        with:
-          name: hyprblue-latest.iso
-          path: ${{ steps.build-iso.outputs.output-directory }}
-          if-no-files-found: error
+      # - name: Upload ISO
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: hyprblue-latest.iso
+      #     path: ${{ steps.build-iso.outputs.output-directory }}
+      #     if-no-files-found: error
 
       # - name: Upload ISOs and Checksum to R2
       #   if: github.event_name == 'workflow_dispatch' && github.ref_name == 'main'
