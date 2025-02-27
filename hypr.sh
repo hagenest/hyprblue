@@ -7,6 +7,7 @@ dnf5 -y copr enable solopasha/hyprland
 dnf5 -y copr enable azandure/clipse
 dnf5 -y copr enable errornointernet/walker
 dnf5 -y copr enable ublue-os/staging
+dnf5 -y copr enable ublue-os/packages 
 
 # Add packages from solopasha here
 dnf5 -y install hyprland
@@ -31,7 +32,7 @@ dnf5 -y install clipse # Clipboard-Manager - TODO see the clipse GitHub for hypr
 dnf5 -y install walker # cool application launcher
 
 # Add packages from ublue-os here, unclear if this is necessary or if they are part of ublue-main
-# dnf5 -y install ublue-brew #seems broken
+dnf5 -y install ublue-brew
 dnf5 -y install ptyxis # my favorite terminal emu
 dnf5 -y install nautilus-open-any-terminal
 dnf5 -y install tlp
@@ -42,6 +43,7 @@ dnf5 -y copr disable solopasha/hyprland
 dnf5 -y copr disable azandure/clipse
 dnf5 -y copr disable errornointernet/walker
 dnf5 -y copr disable ublue-os/staging
+dnf5 -y copr enable ublue-os/packages 
 
 # Add regular fedora packages here
 
@@ -75,6 +77,5 @@ dnf -y install mpv # can't get over the fact that I'm using mpv, but it's the on
 # TODO Alias to start mpv in hdr-mode with less pain
 dnf -y install distrobox
 dnf -y install tealdeer
-dang -y install brew # install regular brew instead
 
 # TODO find out how bluefin installs vscode with devcontainers
