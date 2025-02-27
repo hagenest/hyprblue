@@ -22,3 +22,5 @@ RUN mkdir -p /var/lib/alternatives && \
 COPY hyprland.conf /etc/xdg/hyprland.conf
 
 COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh
+
+RUN ostree container commit
