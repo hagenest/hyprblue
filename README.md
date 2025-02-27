@@ -1,4 +1,8 @@
-# image-template
+# hyprblue
+
+A ublue based image featuring Hyprland as a WM. Highly opinionated, mainly for my own use. feel free to fork to change it to your preferences. 
+
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/hyprblue)](https://artifacthub.io/packages/search?repo=hyprblue)
 
 # Purpose
 
