@@ -23,6 +23,4 @@ COPY hyprland.conf /usr/share/hypr/hyprland.conf
 
 COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh
 
-COPY bash_profile /etc/profile.d/delete
-
 RUN ostree container commit
