@@ -19,7 +19,7 @@ RUN mkdir -p /var/lib/alternatives && \
     /tmp/hypr.sh && \
     ostree container commit
 
-COPY hyprland.conf /usr/share/hypr/hyprland.conf
+COPY hyprland.conf /etc/hypr/hyprland.conf
 
 COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh
 
