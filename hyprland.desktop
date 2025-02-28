@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Hyprland
+Comment=Dynamic tiling Wayland compositor
+Exec=/usr/bin/Hyprland -c /etc/hypr/hyprland.conf
+Type=Application
+DesktopNames=Hyprland
+keywords=WindowManager;compositor;tiling;wayland
