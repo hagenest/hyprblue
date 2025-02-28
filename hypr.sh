@@ -79,3 +79,6 @@ dnf -y install distrobox
 dnf -y install tealdeer
 
 # TODO find out how bluefin installs vscode with devcontainers
+
+# I'm used to German keyboards, sorry
+sudo localectl set-keymap de
