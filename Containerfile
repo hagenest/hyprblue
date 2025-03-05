@@ -19,10 +19,8 @@ RUN mkdir -p /var/lib/alternatives && \
     /tmp/hypr.sh && \
     ostree container commit
 
-COPY hyprland.conf /etc/hypr/hyprland.conf
+COPY config/ /etc/skel/.config/
 
 COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh
-
-COPY hyprland.desktop /usr/share/wayland-sessions/hyprland.desktop
 
 RUN ostree container commit

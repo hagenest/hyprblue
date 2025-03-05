@@ -69,9 +69,6 @@ dnf -y install nautilus
 
 # TODO find out how to install some software through brew in the user home
 
-# TODO IMPORTANT: Find out how to deploy my default configs to the user
-# I'd like them to be in /usr and be of lower prio than the one of the user.
-
 # Software I want
 dnf -y install mpv # can't get over the fact that I'm using mpv, but it's the only one with HDR support
 # TODO Alias to start mpv in hdr-mode with less pain
