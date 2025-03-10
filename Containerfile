@@ -21,7 +21,7 @@ RUN mkdir -p /var/lib/alternatives && \
 
 COPY hyprblue/ /etc/hyprblue/
 
-RUN ln -s /etc/hyprblue/hypr/ /etc/skel/.config
+RUN ln -s /etc/hyprblue/hypr/ /etc/skel/.config/hypr/
 
 COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh
 
