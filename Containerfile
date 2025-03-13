@@ -1,8 +1,8 @@
-FROM ghcr.io/ublue-os/base-main:latest
+# FROM ghcr.io/ublue-os/base-main:latest
 
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:stable
-# FROM ghcr.io/ublue-os/bluefin-nvidia:stable
+FROM ghcr.io/ublue-os/bluefin-dx:stable
 # 
 # ... and so on, here are more base images
 # Universal Blue Images: https://github.com/orgs/ublue-os/packages
@@ -19,10 +19,10 @@ RUN mkdir -p /var/lib/alternatives && \
     /tmp/hypr.sh && \
     ostree container commit
 
-COPY hyprblue/ /etc/hyprblue/
+# COPY hyprblue/ /etc/hyprblue/
 
-RUN ln -s /etc/hyprblue/hypr/ /etc/skel/.config/hypr/
+# RUN ln -s /etc/hyprblue/hypr/ /etc/skel/.config/hypr/
 
-COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh
+# COPY uwsm-hypr.sh /etc/profile.d/uwsm-hypr.sh
 
-RUN ostree container commit
+# RUN ostree container commit
